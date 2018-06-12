@@ -1,1 +1,2 @@
 - After building, should write contract address into frontend/index.js
+- Frontend gets candidate names from API call instead of hardcoded

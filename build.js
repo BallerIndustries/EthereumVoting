@@ -43,6 +43,10 @@ async function main() {
     const compiledCode = compileCode();
     const instance = await deployContract(compiledCode);
 
+    const candidates = instance.getCandidates.call();
+    console.log(candidates);
+
+
     // // How many votes does Rama have?
     // console.log('Votes for Rama ' + instance.totalVotesFor.call('Rama').toLocaleString());
     //

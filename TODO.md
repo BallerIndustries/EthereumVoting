@@ -1,0 +1,1 @@
+- After building, should write contract address into frontend/index.js

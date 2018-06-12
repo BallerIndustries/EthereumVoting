@@ -5,7 +5,7 @@ const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 
 function compileCode() {
     // Load up the code
-    const code = fs.readFileSync('Voting.sol').toString();
+    const code = fs.readFileSync('./backend/Voting.sol').toString();
     const compiledCode = solc.compile(code);
 
     if (compiledCode.errors !== undefined) {
@@ -33,7 +33,7 @@ function deployContract(compiledCode) {
             if (deployedContract.address !== undefined) {
                 const contractInstance = VotingContract.at(deployedContract.address);
                 resolve(contractInstance);
-                console.log('Successfully deployed Voting.sol');
+                console.log('Successfully deployed Voting.sol to ' + deployedContract.address);
             }
         });
     });
@@ -43,15 +43,15 @@ async function main() {
     const compiledCode = compileCode();
     const instance = await deployContract(compiledCode);
 
-    // How many votes does Rama have?
-    console.log('Votes for Rama ' + instance.totalVotesFor.call('Rama').toLocaleString());
-
-    // Vote for Rama
-    instance.voteForCandidate('Rama', { from: web3.eth.accounts[0]});
-    console.log('Angus Cheng voted for Rama');
-
-    // How many does he have now?
-    console.log('Votes for Rama ' + instance.totalVotesFor.call('Rama').toLocaleString());
+    // // How many votes does Rama have?
+    // console.log('Votes for Rama ' + instance.totalVotesFor.call('Rama').toLocaleString());
+    //
+    // // Vote for Rama
+    // instance.voteForCandidate('Rama', { from: web3.eth.accounts[0]});
+    // console.log('Angus Cheng voted for Rama');
+    //
+    // // How many does he have now?
+    // console.log('Votes for Rama ' + instance.totalVotesFor.call('Rama').toLocaleString());
 }
 
 main();
